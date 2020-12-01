@@ -1,0 +1,11 @@
+language: Java
+notifications:
+    email:
+      if: branch = main
+      recipients:
+        - s141220@student.put.poznan.pl
+        - s141317@student.put.poznan.pl
+        - s141325@student.put.poznan.pl
+        - s141329@student.put.poznan.pl
+      on_success: never 
+      on_failure: always 
