@@ -1,4 +1,4 @@
-# BuildingInfo
+# BuildingInfo [![Build Status](https://travis-ci.com/Szczepaniak-M/BuildingInfo.svg?branch=main)](https://travis-ci.com/Szczepaniak-M/BuildingInfo)
 
 ## Opis projektu
 
