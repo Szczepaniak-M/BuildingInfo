@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Building extends Location {
 
-    private List<Location> levels;
+    private List<Location> floors;
 
     public Building(int id, String name) {
         super(id, name);
-        levels = new LinkedList<>();
+        floors = new LinkedList<>();
     }
 
     @Override

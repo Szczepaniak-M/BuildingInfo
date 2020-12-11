@@ -18,12 +18,20 @@ public abstract class Location {
         return name;
     }
 
-    abstract double getArea();
+    double getArea(){
+        return 0;
+    }
 
-    abstract double getCube();
+    double getCube(){
+        return 0;
+    }
 
-    abstract double getHeating();
+     double getHeating(){
+         return 0;
+     }
 
-    abstract double getLight();
+     double getLight(){
+         return 0;
+     }
 
 }
