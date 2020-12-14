@@ -33,3 +33,4 @@ modules.xml
 *.ipr
 
 target/
+bin
