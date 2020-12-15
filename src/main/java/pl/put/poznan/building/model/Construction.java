@@ -1,42 +1,40 @@
 package pl.put.poznan.building.model;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class Construction extends Location {
 
-    private List<? extends Location> locations;
 
-    public Construction(int id, String name) {
+    public Construction(int id, String name, List<Location> sublocation) {
         super(id, name);
-        locations = new LinkedList<>();
+        this.sublocation = sublocation;
     }
 
-    public List<? extends Location> getLocations() {
-    	return locations;
+    public List<Location> getLocations() {
+        return sublocation;
     }
-    
-    public void setLocations(List<? extends Location> locations) {
-    	this.locations = locations;
-    }
-    
+
     @Override
-    double getArea() {
+    public double getArea() {
+        double area = 0;
+        for (Location location : sublocation) {
+            area += location.getArea();
+        }
+        return area;
+    }
+
+    @Override
+    public double getCube() {
         return 0;
     }
 
     @Override
-    double getCube() {
+    public double getHeating() {
         return 0;
     }
 
     @Override
-    double getHeating() {
-        return 0;
-    }
-
-    @Override
-    double getLight() {
+    public double getLight() {
         return 0;
     }
 }

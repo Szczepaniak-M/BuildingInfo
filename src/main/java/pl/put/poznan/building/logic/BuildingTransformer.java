@@ -1,12 +1,14 @@
 package pl.put.poznan.building.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
 import pl.put.poznan.building.model.Construction;
+import pl.put.poznan.building.model.Location;
 import pl.put.poznan.building.model.Room;
 
 /**
@@ -15,28 +17,27 @@ import pl.put.poznan.building.model.Room;
 @Service
 public class BuildingTransformer {
 
-    private final String[] transforms;
-
-    public BuildingTransformer(String[] transforms){
-        this.transforms = transforms;
+    public Location createLocation(JsonObject object){
+        if(object.has("constructions")){
+            JsonArray locationArray = object.get("constructions").getAsJsonArray();
+            List<Location> locationList = new LinkedList<>();
+            for(JsonElement location : locationArray) {
+                locationList.add(createLocation(location.getAsJsonObject()));
+            }
+            return new Construction(
+                    object.get("id").getAsInt(),
+                    object.get("name").getAsString(),
+                    locationList);
+        } else {
+            return new Room(
+                    object.get("id").getAsInt(),
+                    object.get("name").getAsString(),
+                    object.get("area").getAsDouble(),
+                    object.get("cube").getAsDouble(),
+                    object.get("heating").getAsDouble(),
+                    object.get("light").getAsDouble()
+                    );
+        }
     }
 
-    public String transform(String text){
-        // of course, normally it would do something based on the transforms
-        return text.toUpperCase();
-    }
-    
-    public Double calculateAreaOfFloor(Construction construction) {    	
-    	return construction.getLocations().parallelStream().map(l -> (Room) l).mapToDouble(Room::getArea).sum();
-    }
-    
-    public Double calculateAreaOfBuilding(Construction construction) {
-    	List<Room> rooms = new ArrayList<>();    	
-    	
-    	construction.getLocations().forEach(l -> {
-    		((Construction) l).getLocations().parallelStream().map(c -> (Room) c).forEach(r -> rooms.add(r));  	
-    	});
-    	
-    	return rooms.parallelStream().mapToDouble(Room::getArea).sum();
-    }
 }

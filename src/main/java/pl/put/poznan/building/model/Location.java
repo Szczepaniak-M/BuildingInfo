@@ -1,11 +1,14 @@
 package pl.put.poznan.building.model;
 
+import java.util.List;
+
 public abstract class Location {
 
+    protected List<Location> sublocation;
     private int id;
     private String name;
 
-    public Location(int id, String name) {
+    protected Location(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -14,25 +17,25 @@ public abstract class Location {
         return id;
     }
 
+    public List<Location> getSublocation() {
+        return sublocation;
+    }
+
+    public void setSublocation(List<Location> sublocation) {
+        this.sublocation = sublocation;
+    }
+
     public String getName() {
         return name;
     }
 
-    double getArea(){
-        return 0;
-    }
+    abstract public double getArea();
 
-    double getCube(){
-        return 0;
-    }
+    abstract public double getCube();
 
-     double getHeating(){
-         return 0;
-     }
+    abstract public double getHeating();
 
-     double getLight(){
-         return 0;
-     }
-     
-     
+    abstract public double getLight();
+
+
 }
