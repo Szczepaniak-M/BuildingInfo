@@ -5,8 +5,8 @@ import java.util.List;
 public abstract class Location {
 
     protected List<Location> sublocation;
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
 
     protected Location(int id, String name) {
         this.id = id;
@@ -29,13 +29,13 @@ public abstract class Location {
         return name;
     }
 
-    abstract public double getArea();
+    public abstract double getArea();
 
-    abstract public double getCube();
+    public abstract double getCube();
 
-    abstract public double getHeating();
+    public abstract double getHeating();
 
-    abstract public double getLight();
+    public abstract double getLight();
 
 
 }
