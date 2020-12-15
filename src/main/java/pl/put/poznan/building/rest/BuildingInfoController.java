@@ -20,6 +20,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import pl.put.poznan.building.logic.BuildingTransformer;
+import pl.put.poznan.building.model.Construction;
 import pl.put.poznan.building.model.Room;
 
 
@@ -74,6 +75,8 @@ public class BuildingInfoController {
     			rooms.add(gson.fromJson(r, Room.class));
     		}
     	}
+    	
+    	Construction construction = gson.fromJson(data, Construction.class);
     	
     	responseBody.put("sum", buildingTransformer.calculateAreaOfRooms(rooms));
     	
