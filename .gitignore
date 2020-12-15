@@ -34,3 +34,7 @@ modules.xml
 
 target/
 bin
+
+.settings/
+.project
+.classpath
