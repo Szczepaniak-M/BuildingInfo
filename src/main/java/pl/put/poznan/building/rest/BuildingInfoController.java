@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import pl.put.poznan.building.logic.BuildingTransformer;
 import pl.put.poznan.building.model.Construction;
 import pl.put.poznan.building.model.Room;
+import pl.put.poznan.building.model.Location;
 
 
 @RestController
@@ -66,19 +67,25 @@ public class BuildingInfoController {
     @PostMapping(value = "/calculate/building", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Double>> calculateBuildingArea(@RequestBody JsonObject data) {
     	Map<String, Double> responseBody = new HashMap<>();
-    	List<Room> rooms = new ArrayList<>();
-    	JsonArray floors = data.get("constructions").getAsJsonArray();
+    	Construction building = new Construction(data.get("id").getAsInt(), data.get("name").getAsString());
+    	List<Location> floors = new ArrayList<>();
     	
-    	for(JsonElement floor : floors) {
-    		JsonArray roomsPerFloor = floor.getAsJsonObject().get("constructions").getAsJsonArray();
+    	JsonArray floorsArray = data.get("constructions").getAsJsonArray();    	
+    	for(JsonElement f : floorsArray) {
+    		JsonObject fObj = f.getAsJsonObject();
+    		Construction floor = new Construction(fObj.get("id").getAsInt(), fObj.get("name").getAsString());    		
+    		List<Room> rooms = new ArrayList<>();
+    		
+    		JsonArray roomsPerFloor = fObj.get("constructions").getAsJsonArray();
     		for(JsonElement r : roomsPerFloor) {
     			rooms.add(gson.fromJson(r, Room.class));
     		}
+    		floor.setLocations(rooms);
+    		floors.add(floor);
     	}
+    	building.setLocations(floors);       
     	
-    	Construction construction = gson.fromJson(data, Construction.class);
-    	
-    	responseBody.put("sum", buildingTransformer.calculateAreaOfRooms(rooms));
+    	responseBody.put("sum", buildingTransformer.calculateAreaOfBuilding(building));
     	
     	return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
@@ -87,13 +94,15 @@ public class BuildingInfoController {
     public ResponseEntity<Map<String, Double>> calculateFloorArea(@RequestBody JsonObject data) {
     	Map<String, Double> responseBody = new HashMap<>();
     	List<Room> rooms = new ArrayList<>();    	
-
-		JsonArray roomsPerFloor = data.get("constructions").getAsJsonArray();
-		for(JsonElement r : roomsPerFloor) {
+    	Construction floor = new Construction(data.get("id").getAsInt(), data.get("name").getAsString());
+		
+    	JsonArray roomsPerFloorArray = data.get("constructions").getAsJsonArray();
+		for(JsonElement r : roomsPerFloorArray) {
 			rooms.add(gson.fromJson(r, Room.class));
 		}
-    	
-    	responseBody.put("sum", buildingTransformer.calculateAreaOfRooms(rooms));
+    	floor.setLocations(rooms);		
+		
+    	responseBody.put("sum", buildingTransformer.calculateAreaOfFloor(floor));
     	
     	return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
@@ -101,9 +110,9 @@ public class BuildingInfoController {
     @PostMapping(value = "/calculate/room", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Double>> calculateRoomArea(@RequestBody JsonObject data) {
     	Map<String, Double> responseBody = new HashMap<>();
-    	List<Room> rooms = List.of(gson.fromJson(data, Room.class));    		
+    	Room room = gson.fromJson(data, Room.class);    		
     	
-    	responseBody.put("sum", buildingTransformer.calculateAreaOfRooms(rooms));
+    	responseBody.put("sum", room.getArea());
     	
     	return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
