@@ -1,25 +1,30 @@
 package pl.put.poznan.building.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class Construction extends Location {
 
-
     public Construction(int id, String name, List<Location> sublocation) {
         super(id, name);
-        this.sublocation = sublocation;
-    }
-
-    public List<Location> getLocations() {
-        return sublocation;
+        setSublocation(sublocation);
     }
 
     @Override
     public double getArea() {
         double area = 0;
-        for (Location location : sublocation) {
+        for (Location location : getSublocation()) {
             area += location.getArea();
         }
+        return area;
+    }
+
+    public double getArea(Map<Integer, Double> map) {
+        double area = 0;
+        for (Location location : getSublocation()) {
+            area += location.getArea(map);
+        }
+        map.put(getId(), area);
         return area;
     }
 

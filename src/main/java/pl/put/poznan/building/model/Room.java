@@ -1,5 +1,7 @@
 package pl.put.poznan.building.model;
 
+import java.util.Map;
+
 public class Room extends Location {
     private final double area;
     private final double cube;
@@ -16,6 +18,12 @@ public class Room extends Location {
 
     @Override
     public double getArea() {
+        return area;
+    }
+
+    @Override
+    public double getArea(Map<Integer, Double> map) {
+        map.put(getId(), area);
         return area;
     }
 

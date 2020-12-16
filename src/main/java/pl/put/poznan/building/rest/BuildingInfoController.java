@@ -30,14 +30,20 @@ public class BuildingInfoController {
     }
 
 
-    @PostMapping(value = "/calculate/area", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Double>> calculateBuildingArea(@RequestBody JsonObject data) {
-
+    @PostMapping(value = "/area/root", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Double>> calculateRootArea(@RequestBody JsonObject data) {
 		Location location = buildingTransformer.createLocation(data);
 		Map<String, Double> responseBody = new HashMap<>();
     	responseBody.put("sum", location.getArea());
-    	
     	return new ResponseEntity<>(responseBody, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/area/all", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<Integer, Double>> calculateLocationsArea(@RequestBody JsonObject data) {
+        Map<Integer, Double> responseBody = new HashMap<>();
+        Location location = buildingTransformer.createLocation(data);
+        location.getArea(responseBody);
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 
 
