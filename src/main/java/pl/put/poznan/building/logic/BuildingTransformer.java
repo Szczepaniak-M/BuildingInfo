@@ -18,8 +18,8 @@ import pl.put.poznan.building.model.Room;
 public class BuildingTransformer {
 
     public Location createLocation(JsonObject object){
-        if(object.has("constructions")){
-            JsonArray locationArray = object.get("constructions").getAsJsonArray();
+        if(object.has("locations")){
+            JsonArray locationArray = object.get("locations").getAsJsonArray();
             List<Location> locationList = new LinkedList<>();
             for(JsonElement location : locationArray) {
                 locationList.add(createLocation(location.getAsJsonObject()));

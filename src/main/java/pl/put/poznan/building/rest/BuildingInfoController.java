@@ -46,7 +46,13 @@ public class BuildingInfoController {
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 
-
+    @PostMapping(value = "/heat/limit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<Integer, Boolean>> calculateHeatOverLimit(@RequestBody JsonObject data) {
+        Map<Integer, Boolean> responseBody = new HashMap<>();
+        Location location = buildingTransformer.createLocation(data.getAsJsonObject("locations"));
+        location.isOverHeatLimit(responseBody, data.get("limit").getAsDouble());
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
+    }
 }
 
 

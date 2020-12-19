@@ -41,4 +41,14 @@ public class Room extends Location {
     public double getLight() {
         return light;
     }
+
+    @Override
+    public boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit) {
+        if(this.heating > limit) {
+            map.put(this.getId(), true);
+            return true;
+        }
+        map.put(this.getId(), false);
+        return false;
+    }
 }

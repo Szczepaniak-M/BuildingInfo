@@ -40,5 +40,5 @@ public abstract class Location {
 
     public abstract double getLight();
 
-
+    public abstract boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit);
 }

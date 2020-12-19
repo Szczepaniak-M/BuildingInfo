@@ -35,11 +35,28 @@ public class Construction extends Location {
 
     @Override
     public double getHeating() {
-        return 0;
+        double heating = 0;
+        for (Location location : getSublocation()) {
+            heating += location.getHeating();
+        }
+        return heating;
     }
 
     @Override
     public double getLight() {
         return 0;
+    }
+
+    @Override
+    public boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit) {
+        for (Location location : getSublocation()) {
+            location.isOverHeatLimit(map, limit);
+        }
+        if(this.getHeating() > limit) {
+            map.put(this.getId(), true);
+            return true;
+        }
+        map.put(this.getId(), false);
+        return false;
     }
 }
