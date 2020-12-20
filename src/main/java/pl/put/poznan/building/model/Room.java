@@ -28,7 +28,8 @@ public class Room extends Location {
     }
 
     @Override
-    public double getCube() {
+    public double getCube(Map<Integer, Double> map) {
+        map.put(getId(), cube);
         return cube;
     }
 

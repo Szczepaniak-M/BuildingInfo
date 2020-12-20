@@ -53,6 +53,15 @@ public class BuildingInfoController {
         location.isOverHeatLimit(responseBody, data.get("limit").getAsDouble());
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
+
+    @PostMapping(value = "/cubage/value", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<Integer, Double>> calculateCubage(@RequestBody JsonObject data) {
+        Map<Integer, Double> responseBody = new HashMap<>();
+        Location location = buildingTransformer.createLocation(data.getAsJsonObject("locations"));
+        location.getCube(responseBody);
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
+    }
+
 }
 
 

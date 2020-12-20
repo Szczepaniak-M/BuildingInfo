@@ -34,7 +34,7 @@ public abstract class Location {
 
     public abstract double getArea(Map<Integer, Double> map);
 
-    public abstract double getCube();
+    public abstract double getCube(Map<Integer, Double> responseBody);
 
     public abstract double getHeating();
 

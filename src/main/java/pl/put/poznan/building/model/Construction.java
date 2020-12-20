@@ -29,8 +29,13 @@ public class Construction extends Location {
     }
 
     @Override
-    public double getCube() {
-        return 0;
+    public double getCube(Map<Integer, Double> map) {
+        double cube = 0;
+        for (Location location : getSublocation()) {
+            cube += location.getCube(map);
+        }
+        map.put(getId(), cube);
+        return cube;
     }
 
     @Override
