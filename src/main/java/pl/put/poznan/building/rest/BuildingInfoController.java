@@ -64,7 +64,7 @@ public class BuildingInfoController {
     public ResponseEntity<Map<Integer, Double>> calculateCubage(@RequestBody JsonObject data) {
         logger.info(">> calculateCubage {}", data.toString());
         Map<Integer, Double> responseBody = new HashMap<>();
-        Location location = buildingTransformer.createLocation(data.getAsJsonObject("locations"));
+        Location location = buildingTransformer.createLocation(data);
         location.getCube(responseBody);
         logger.info("<< calculateCubage: {}", responseBody.toString());
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
