@@ -1,7 +1,6 @@
 package pl.put.poznan.building.rest;
-import java.util.HashMap;
-import java.util.Map;
 
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.google.gson.JsonObject;
-
 import pl.put.poznan.building.logic.BuildingTransformer;
 import pl.put.poznan.building.model.Location;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -26,23 +25,23 @@ public class BuildingInfoController {
     private final BuildingTransformer buildingTransformer;
 
     public BuildingInfoController(BuildingTransformer buildingTransformer) {
-    	this.buildingTransformer = buildingTransformer;
+        this.buildingTransformer = buildingTransformer;
     }
 
 
     @PostMapping(value = "/area/root", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Double>> calculateRootArea(@RequestBody JsonObject data) {
-		logger.info(">> calculateRootArea {}", data.toString());
+        logger.info(">> calculateRootArea: {}", data.toString());
         Location location = buildingTransformer.createLocation(data);
-		Map<String, Double> responseBody = new HashMap<>();
-    	responseBody.put("sum", location.getArea());
-    	logger.info("<< calculateRootArea: {}", responseBody.toString());
-    	return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        Map<String, Double> responseBody = new HashMap<>();
+        responseBody.put("sum", location.getArea());
+        logger.info("<< calculateRootArea: {}", responseBody.toString());
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 
     @PostMapping(value = "/area/all", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<Integer, Double>> calculateLocationsArea(@RequestBody JsonObject data) {
-        logger.info(">> calculateLocationsAreas {}", data.toString());
+        logger.info(">> calculateLocationsArea: {}", data.toString());
         Map<Integer, Double> responseBody = new HashMap<>();
         Location location = buildingTransformer.createLocation(data);
         location.getArea(responseBody);
@@ -52,7 +51,7 @@ public class BuildingInfoController {
 
     @PostMapping(value = "/heat/limit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<Integer, Boolean>> calculateHeatOverLimit(@RequestBody JsonObject data) {
-        logger.info(">> calculateHeatOverLimit {}", data.toString());
+        logger.info(">> calculateHeatOverLimit: {}", data.toString());
         Map<Integer, Boolean> responseBody = new HashMap<>();
         Location location = buildingTransformer.createLocation(data.getAsJsonObject("locations"));
         location.isOverHeatLimit(responseBody, data.get("limit").getAsDouble());
@@ -60,13 +59,23 @@ public class BuildingInfoController {
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/cubage/value", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<Integer, Double>> calculateCubage(@RequestBody JsonObject data) {
-        logger.info(">> calculateCubage {}", data.toString());
+    @PostMapping(value = "/cubage/root", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Double>> calculateRootCubage(@RequestBody JsonObject data) {
+        logger.info(">> calculateRootCubage: {}", data.toString());
+        Map<String, Double> responseBody = new HashMap<>();
+        Location location = buildingTransformer.createLocation(data);
+        responseBody.put("sum", location.getCube());
+        logger.info("<< calculateRootCubage: {}", responseBody.toString());
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/cubage/all", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<Integer, Double>> calculateLocationsCubage(@RequestBody JsonObject data) {
+        logger.info(">> calculateLocationsCubage {}", data.toString());
         Map<Integer, Double> responseBody = new HashMap<>();
         Location location = buildingTransformer.createLocation(data);
         location.getCube(responseBody);
-        logger.info("<< calculateCubage: {}", responseBody.toString());
+        logger.info("<< calculateLocationsCubage: {}", responseBody.toString());
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 

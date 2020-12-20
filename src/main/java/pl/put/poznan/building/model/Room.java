@@ -28,6 +28,11 @@ public class Room extends Location {
     }
 
     @Override
+    public double getCube() {
+        return cube;
+    }
+
+    @Override
     public double getCube(Map<Integer, Double> map) {
         map.put(getId(), cube);
         return cube;
@@ -45,7 +50,7 @@ public class Room extends Location {
 
     @Override
     public boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit) {
-        if(this.heating > limit) {
+        if(this.heating / this.cube > limit) {
             map.put(this.getId(), true);
             return true;
         }

@@ -29,6 +29,15 @@ public class Construction extends Location {
     }
 
     @Override
+    public double getCube() {
+        double cube = 0;
+        for (Location location : getSublocation()) {
+            cube += location.getCube();
+        }
+        return cube;
+    }
+
+    @Override
     public double getCube(Map<Integer, Double> map) {
         double cube = 0;
         for (Location location : getSublocation()) {
@@ -57,7 +66,7 @@ public class Construction extends Location {
         for (Location location : getSublocation()) {
             location.isOverHeatLimit(map, limit);
         }
-        if(this.getHeating() > limit) {
+        if (this.getHeating() / this.getCube() > limit) {
             map.put(this.getId(), true);
             return true;
         }

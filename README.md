@@ -14,8 +14,8 @@ Struktura danych:
 - Pomieszczenie dodatkowo jest charakteryzowane przez:
   - area - powierzchnia w m^2
   - cube - kubatura pomieszczenia w m^3
-  - heating - poziom zużycia energii ogrzewania w złotówkach(float)
-  - light – łączna moc oświetlenia
+  - heating - poziom zużycia energii ogrzewania w złotówkach 
+  - light – łączna moc oświetlenia w kWh
 
 ## Skład Zespołu:
 
@@ -30,10 +30,11 @@ Struktura danych:
 
 ## Dokumentacja API
 
-[POST] Request do /api/area/root
+- [POST] /api/area/root - zwraca powierzchnię lokacji najwyżej w hierarchii
 
+Request body:
 ```json
-{  "id": 1,
+{ "id": 1,
   "name": "testBuilding",
   "locations":[{
     "id": 2,
@@ -58,17 +59,19 @@ Struktura danych:
 }
 ```
 
-Odpowiedź:
-
+Response:
 ```json
 {
   "sum": 188.0
 }
 ```
-[POST] Request do /api/area/all
 
+
+- [POST] /api/area/all - zwraca powierzchnię wszystkich lokacji
+
+Request body:
 ```json
-{  "id": 1,
+{ "id": 1,
   "name": "testBuilding",
   "locations":[{
     "id": 2,
@@ -104,10 +107,11 @@ Odpowiedź:
 }
 ```
 
-[POST] Request do /api/heat/limit
+- [POST] /api/heat/limit - sprawdza przekroczenie limitu ogrzewania
 
+Request body
 ```json
-{   "limit": 100,
+{ "limit": 0.4,
   "locations": {
     "id": 1,
     "name": "testBuilding",
@@ -135,21 +139,21 @@ Odpowiedź:
 }
 ```
 
-Odpowiedź:
+Response:
 
 ```json
 {
-    "1": true,
-    "2": true,
-    "3": true,
-    "4": false
+  "1": true,
+  "2": true,
+  "3": false,
+  "4": true
 }
 ```
 
-[POST] Request do /api/cubage/value
+- [POST] /api/cubage/root - zwraca kubature lokacji najwyżej w hierarchii
 
 ```json
-{  "id": 1,
+{ "id": 1,
   "name": "testBuilding",
   "locations":[{
     "id": 2,
@@ -174,7 +178,43 @@ Odpowiedź:
 }
 ```
 
-Odpowiedź:
+Response:
+
+```json
+{
+  "sum": 590.0
+}
+```
+
+- [POST] /api/cubage/all - zwraca kubaturę wszystkich lokacji
+
+```json
+{ "id": 1,
+  "name": "testBuilding",
+  "locations":[{
+    "id": 2,
+    "name": "testLvL",
+    "locations": [{
+      "id": 3,
+      "name": "testRoom",
+      "area": 123.0,
+      "cube": 400.0,
+      "heating": 156.0,
+      "light": 210.0
+    },
+      {
+        "id": 4,
+        "name": "testRoom",
+        "area": 65.0,
+        "cube": 190.0,
+        "heating": 90.0,
+        "light": 100.0
+      }]
+  }]
+}
+```
+
+Response:
 
 ```json
 {
