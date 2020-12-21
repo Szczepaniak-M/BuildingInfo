@@ -21,7 +21,7 @@ public class BuildingTransformer {
     private static final Logger logger = LoggerFactory.getLogger(BuildingTransformer.class);
 
     /**
-     * This function creates Location onject from input data
+     * This function creates Location object from input data
      * 
      * @param JsonObject it contains structure of location
      * @return Location object
