@@ -14,12 +14,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This is just an example to show that the logic should be outside the REST service.
+ * This is the main service of application.
  */
 @Service
 public class BuildingTransformer {
     private static final Logger logger = LoggerFactory.getLogger(BuildingTransformer.class);
 
+    /**
+     * This function creates Location onject from input data
+     * 
+     * @param JsonObject it contains structure of location
+     * @return Location object
+     */
     public Location createLocation(JsonObject object) {
         if (object.has("locations")) {
             JsonArray locationArray = object.get("locations").getAsJsonArray();

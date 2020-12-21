@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"pl.put.poznan.building.model","l":"Construction"},{"p":"pl.put.poznan.building.model","l":"Location"},{"p":"pl.put.poznan.building.model","l":"Room"}]
