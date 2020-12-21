@@ -23,7 +23,7 @@ public class BuildingTransformer {
     /**
      * This function creates Location object from input data
      * 
-     * @param JsonObject it contains structure of location
+     * @param object JsonObject containing structure of location
      * @return Location object
      */
     public Location createLocation(JsonObject object) {

@@ -8,7 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = {"pl.put.poznan.building"})
 public class BuildingInfoApplication {
-
+    /**
+     * Main method of application
+     * @param args extra arguments
+     */
     public static void main(String[] args) {
         SpringApplication.run(BuildingInfoApplication.class, args);
     }
