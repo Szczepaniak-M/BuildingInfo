@@ -21,16 +21,16 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api")
-public class BuildingInfoController {
+public class BuildingInfoRestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(BuildingInfoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(BuildingInfoRestController.class);
     private final BuildingTransformer buildingTransformer;
 
     /**
      * In constructor must be injected an instance of BuildingTransformer
      * @param buildingTransformer instance of BuildingTransformer
      */
-    public BuildingInfoController(BuildingTransformer buildingTransformer) {
+    public BuildingInfoRestController(BuildingTransformer buildingTransformer) {
         this.buildingTransformer = buildingTransformer;
     }
 
