@@ -1,5 +1,6 @@
 package pl.put.poznan.building.model;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,10 @@ public class Construction extends Location {
     public Construction(int id, String name, List<Location> sublocation) {
         super(id, name);
         setSublocation(sublocation);
+    }
+
+    public Construction(){
+        setSublocation(new LinkedList<>());
     }
 
     @Override
@@ -59,6 +64,11 @@ public class Construction extends Location {
     @Override
     public double getLight() {
         return 0;
+    }
+
+    @Override
+    public boolean isOverHeatLimit(double limit) {
+        return this.getHeating() / this.getCube() > limit;
     }
 
     @Override

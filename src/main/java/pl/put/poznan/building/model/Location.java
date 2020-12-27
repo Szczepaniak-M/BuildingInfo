@@ -6,8 +6,11 @@ import java.util.Map;
 public abstract class Location {
 
     private List<Location> sublocation;
-    private final int id;
-    private final String name;
+    private int id;
+    private String name;
+
+    protected Location() {
+    }
 
     protected Location(int id, String name) {
         this.id = id;
@@ -41,6 +44,8 @@ public abstract class Location {
     public abstract double getHeating();
 
     public abstract double getLight();
+
+    public abstract boolean isOverHeatLimit(double limit);
 
     public abstract boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit);
 }

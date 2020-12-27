@@ -3,10 +3,13 @@ package pl.put.poznan.building.model;
 import java.util.Map;
 
 public class Room extends Location {
-    private final double area;
-    private final double cube;
-    private final double heating;
-    private final double light;
+    private double area;
+    private double cube;
+    private double heating;
+    private double light;
+
+    public Room() {
+    }
 
     public Room(int id, String name, double area, double cube, double heating, double light) {
         super(id, name);
@@ -49,8 +52,13 @@ public class Room extends Location {
     }
 
     @Override
+    public boolean isOverHeatLimit(double limit) {
+        return this.heating / this.cube > limit;
+    }
+
+    @Override
     public boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit) {
-        if(this.heating / this.cube > limit) {
+        if (this.heating / this.cube > limit) {
             map.put(this.getId(), true);
             return true;
         }

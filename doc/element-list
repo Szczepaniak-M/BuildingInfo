@@ -1,4 +1,5 @@
 pl.put.poznan.building.app
+pl.put.poznan.building.gui
 pl.put.poznan.building.logic
 pl.put.poznan.building.model
 pl.put.poznan.building.rest
