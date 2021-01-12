@@ -23,7 +23,7 @@ public class BuildingInfoController {
 
     /**
      * In constructor must be injected an instance of BuildingTransformer
-     * 
+     *
      * @param buildingTransformer instance of BuildingTransformer
      */
     public BuildingInfoController(BuildingTransformer buildingTransformer) {
@@ -32,6 +32,8 @@ public class BuildingInfoController {
 
     /**
      * This function returns webpage where user choose which activity want to perform
+     *
+     * @return main webpage
      */
     @GetMapping("/")
     public String requestSizeForm() {
@@ -40,7 +42,13 @@ public class BuildingInfoController {
 
     /**
      * This function returns webpage with detailed informations
-     * 
+     *
+     * @param locationType type of location to transform
+     * @param requestType  type of operation to perform
+     * @param floors       numbers of floors
+     * @param rooms        number of rooms
+     * @param limit        value of limit
+     * @param model        object of type Model
      * @return webpage
      */
     @PostMapping("/details")
@@ -82,19 +90,23 @@ public class BuildingInfoController {
 
     /**
      * This function returns webpage with general result
-     * 
+     *
+     * @param locationString json as string
+     * @param requestType    type of operation to perform
+     * @param limit          value of limit
+     * @param model          object of type Model
      * @return webpage
      */
     @PostMapping("/result")
     public String showInfo(@ModelAttribute("location") String locationString,
-                         @ModelAttribute("requestType") RequestType requestType,
-                         @ModelAttribute("limit") String limit,
-                         Model model) {
+                           @ModelAttribute("requestType") RequestType requestType,
+                           @ModelAttribute("limit") String limit,
+                           Model model) {
         JsonObject locationJson = JsonParser.parseString(locationString).getAsJsonObject();
         Location location = buildingTransformer.createLocation(locationJson);
 
         double limitNumber = 0;
-        if(!limit.isEmpty()) {
+        if (!limit.isEmpty()) {
             limitNumber = Double.parseDouble(limit);
         }
         model.addAttribute("location", location);

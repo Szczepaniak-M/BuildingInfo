@@ -9,12 +9,12 @@ import java.util.Map;
  */
 public class Construction extends Location {
 
-	/**
+    /**
      * Constructor with following parameters:
-     * 
-     * @param id - type int
-     * @param name - type String
-     * @param sublocations - List<Location>
+     *
+     * @param id          id of Construction
+     * @param name        name of Construction
+     * @param sublocation list of sublocations
      */
     public Construction(int id, String name, List<Location> sublocation) {
         super(id, name);
@@ -24,14 +24,14 @@ public class Construction extends Location {
     /**
      * Empty constructor
      */
-    public Construction(){
+    public Construction() {
         setSublocation(new LinkedList<>());
     }
 
     /**
      * This function returns total area of sublocations
-     * 
-     * @return area - double
+     *
+     * @return area of Construction
      */
     @Override
     public double getArea() {
@@ -44,9 +44,9 @@ public class Construction extends Location {
 
     /**
      * This function returns total area of sublocations and puts it in map with id as key
-     * 
-     * @param mao - Map<Intger, Double.
-     * @return area - double
+     *
+     * @param map visitor
+     * @return area of Construction
      */
     public double getArea(Map<Integer, Double> map) {
         double area = 0;
@@ -59,8 +59,8 @@ public class Construction extends Location {
 
     /**
      * This function returns total cubage of sublocations
-     * 
-     * @return cube - double
+     *
+     * @return cubature of Construction
      */
     @Override
     public double getCube() {
@@ -73,9 +73,9 @@ public class Construction extends Location {
 
     /**
      * This function returns total cubage of sublocations and puts it in map with id as key
-     * 
-     * @param mao - Map<Intger, Double.
-     * @return cube - double
+     *
+     * @param map visitor
+     * @return cubature of Construction
      */
     @Override
     public double getCube(Map<Integer, Double> map) {
@@ -89,8 +89,8 @@ public class Construction extends Location {
 
     /**
      * This function returns total value of heating of sublocations
-     * 
-     * @return heating - double
+     *
+     * @return heating of Construction
      */
     @Override
     public double getHeating() {
@@ -103,22 +103,22 @@ public class Construction extends Location {
 
     /**
      * This function returns value of light of Construction
-     * 
-     * @return light - double
+     *
+     * @return light of Construction
      */
     @Override
     public double getLight() {
-    	return 0.0;
+        return 0.0;
     }
-    
+
     /**
      * This function returns value of light per square meter
-     * 
-     * @return light per square meter - double
+     *
+     * @return light per square meter of Construction
      */
-	@Override
-	public double getLightPerSquareMeter() {
-		double light = 0;
+    @Override
+    public double getLightPerSquareMeter() {
+        double light = 0;
         double area = 0;
         for (Location location : getSublocation()) {
             light += location.getLight();
@@ -127,17 +127,17 @@ public class Construction extends Location {
             area += location.getArea();
         }
         return light / area;
-	}
-	
-	/**
+    }
+
+    /**
      * This function returns value of light per square meter and puts it in map with id as key
-     * 
-     * @param map - Map<Integer, Double>
-     * @return light per square meter - double
+     *
+     * @param map visitor
+     * @return light per square meter of Construction
      */
-	@Override
-	public double getLightPerSquareMeter(Map<Integer, Double> map) {
-		double light = 0;
+    @Override
+    public double getLightPerSquareMeter(Map<Integer, Double> map) {
+        double light = 0;
         double area = 0;
         for (Location location : getSublocation()) {
             light += location.getLight();
@@ -146,12 +146,13 @@ public class Construction extends Location {
         }
         map.put(getId(), light / area);
         return light / area;
-	}
+    }
 
     /**
      * This function checks if exceed doesn't exceed heat limit
-     * 
-     * @return boolean
+     *
+     * @param limit value of limit
+     * @return boolean if limit is exceed
      */
     @Override
     public boolean isOverHeatLimit(double limit) {
@@ -160,10 +161,10 @@ public class Construction extends Location {
 
     /**
      * This function checks if Construction doesn't exceed heat limit and puts it in the map with id as key
-     * 
-     * @param map - Map<Intger, Boolean>
-     * @param limit - double
-     * @return boolean
+     *
+     * @param map   visitor
+     * @param limit value of limit
+     * @return boolean if limit is exceed
      */
     @Override
     public boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit) {

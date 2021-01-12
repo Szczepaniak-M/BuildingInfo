@@ -20,9 +20,9 @@ public abstract class Location {
 
     /**
      * Constructor with params:
-     * 
-     * @param id - int
-     * @param name - name
+     *
+     * @param id   id of construction
+     * @param name name of construction
      */
     protected Location(int id, String name) {
         this.id = id;
@@ -31,8 +31,8 @@ public abstract class Location {
 
     /**
      * This function returns id
-     * 
-     * @return id - int
+     *
+     * @return id of construction
      */
     public int getId() {
         return id;
@@ -40,8 +40,8 @@ public abstract class Location {
 
     /**
      * This function returns name
-     * 
-     * @return name - String
+     *
+     * @return name of construction
      */
     public String getName() {
         return name;
@@ -49,8 +49,8 @@ public abstract class Location {
 
     /**
      * This function returns list of sublocations
-     * 
-     * @return sublocations - List<Location>
+     *
+     * @return list of sublocations
      */
     public List<Location> getSublocation() {
         return sublocation;
@@ -58,8 +58,8 @@ public abstract class Location {
 
     /**
      * This method set list of sublocations
-     * 
-     * @param sublocation - List<Location>
+     *
+     * @param sublocation list of locations
      */
     public void setSublocation(List<Location> sublocation) {
         this.sublocation = sublocation;
@@ -76,9 +76,9 @@ public abstract class Location {
     public abstract double getHeating();
 
     public abstract double getLight();
-    
+
     public abstract double getLightPerSquareMeter();
-    
+
     public abstract double getLightPerSquareMeter(Map<Integer, Double> responseBody);
 
     public abstract boolean isOverHeatLimit(double limit);

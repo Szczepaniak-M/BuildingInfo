@@ -19,13 +19,13 @@ public class Room extends Location {
 
     /**
      * Constructor with following parameters:
-     * 
-     * @param id - type int
-     * @param name - type String
-     * @param area - type double
-     * @param cube - type double
-     * @param heating - type double
-     * @param light - type double
+     *
+     * @param id      id of Room
+     * @param name    name of Room
+     * @param area    area of Room
+     * @param cube    cubature of Room
+     * @param heating heating of Room
+     * @param light   light of Room
      */
     public Room(int id, String name, double area, double cube, double heating, double light) {
         super(id, name);
@@ -37,8 +37,8 @@ public class Room extends Location {
 
     /**
      * This function returns area of Room
-     * 
-     * @return area - double
+     *
+     * @return area of Room
      */
     @Override
     public double getArea() {
@@ -47,9 +47,9 @@ public class Room extends Location {
 
     /**
      * This functions puts area of Room in map with id as a key
-     * 
-     * @param map - Map<Integer, Double>
-     * @return area - double
+     *
+     * @param map visitor
+     * @return area of Room
      */
     @Override
     public double getArea(Map<Integer, Double> map) {
@@ -59,8 +59,8 @@ public class Room extends Location {
 
     /**
      * This function returns cubage of Room
-     * 
-     * @return cube - double
+     *
+     * @return cubature of Room
      */
     @Override
     public double getCube() {
@@ -69,9 +69,9 @@ public class Room extends Location {
 
     /**
      * This functions puts cubage of Room in map with id as a key
-     * 
-     * @param map - Map<Integer, Double>
-     * @return cube - double
+     *
+     * @param map visitor
+     * @return cubature of Room
      */
     @Override
     public double getCube(Map<Integer, Double> map) {
@@ -81,8 +81,8 @@ public class Room extends Location {
 
     /**
      * This function returns heating value of Room
-     * 
-     * @return heating - double
+     *
+     * @return heating value of Room
      */
     @Override
     public double getHeating() {
@@ -91,39 +91,41 @@ public class Room extends Location {
 
     /**
      * This function returns light value of Room
-     * 
-     * @return light - double
+     *
+     * @return light value of Room
      */
     @Override
     public double getLight() {
         return light;
     }
-    
+
     /**
      * This function returns value of light per square meter of Room
-     * 
-     * @return lightPerSquareMeter - double
+     *
+     * @return light per square meter of Room
      */
     @Override
     public double getLightPerSquareMeter() {
         return light / area;
     }
-    
+
     /**
      * This function returns value of light per square meter of Room and puts it in map with id as key
-     * 
-     * @return lightPerSquareMeter - double
+     *
+     * @param map visitor
+     * @return light per square meter of Room
      */
-	@Override
-	public double getLightPerSquareMeter(Map<Integer, Double> map) {
-		map.put(getId(), light / area);
-		return light / area;
-	}
+    @Override
+    public double getLightPerSquareMeter(Map<Integer, Double> map) {
+        map.put(getId(), light / area);
+        return light / area;
+    }
 
     /**
      * This function checks if Room doesn't exceed heat limit
-     * 
-     * @return boolean
+     *
+     * @param limit value of limit
+     * @return boolean if limit is exceed
      */
     @Override
     public boolean isOverHeatLimit(double limit) {
@@ -132,10 +134,10 @@ public class Room extends Location {
 
     /**
      * This function checks if Room doesn't exceed heat limit and puts it in the map with id as key
-     * 
-     * @param map - Map<Intger, Boolean>
-     * @param limit - double
-     * @return boolean
+     *
+     * @param map   visitor
+     * @param limit value of limit
+     * @return boolean if limit is exceed
      */
     @Override
     public boolean isOverHeatLimit(Map<Integer, Boolean> map, double limit) {
