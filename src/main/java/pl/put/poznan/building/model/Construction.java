@@ -108,7 +108,11 @@ public class Construction extends Location {
      */
     @Override
     public double getLight() {
-        return 0.0;
+        double light = 0;
+        for (Location location : getSublocation()) {
+            light += location.getLight();
+        }
+        return light;
     }
 
     /**

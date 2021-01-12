@@ -115,34 +115,34 @@ public class BuildingInfoRestController {
     }
     
     /**
-     * This function returns light per  of Location
+     * This function returns light per square meter of Location
      * 
      * @param jsonObject json with input data
      * @return JsonObject json with value of calculated light per square meter for given Location
      */
     @PostMapping(value = "/light/root", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Double>> calculateRootLightPerSquareMeter(@RequestBody JsonObject jsonObject) {
-        logger.info(">> calculateRootLight: {}", jsonObject.toString());
+        logger.info(">> calculateRootLightPerSquareMeter: {}", jsonObject.toString());
         Map<String, Double> responseBody = new HashMap<>();
         Location location = buildingTransformer.createLocation(jsonObject);
         responseBody.put("sum", location.getLightPerSquareMeter());
-        logger.info("<< calculateRootCubage: {}", responseBody.toString());
+        logger.info("<< calculateRootLightPerSquareMeter: {}", responseBody.toString());
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
     
     /**
-     * This function returns cubage for every sublocation
+     * This function returns light per square meter for every sublocation
      * 
      * @param jsonObject json with input data
      * @return JsonObject json with pairs: Location ID and Location cubage
      */
     @PostMapping(value = "/light/all", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<Integer, Double>> calculateLocationsLightPerSquareMeter(@RequestBody JsonObject jsonObject) {
-        logger.info(">> calculateLocationsCubage {}", jsonObject.toString());
+        logger.info(">> calculateLocationsLightPerSquareMeter {}", jsonObject.toString());
         Map<Integer, Double> responseBody = new HashMap<>();
         Location location = buildingTransformer.createLocation(jsonObject);
         location.getLightPerSquareMeter(responseBody);
-        logger.info("<< calculateLocationsCubage: {}", responseBody.toString());
+        logger.info("<< calculateLocationsLightPerSquareMeter: {}", responseBody.toString());
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 }
