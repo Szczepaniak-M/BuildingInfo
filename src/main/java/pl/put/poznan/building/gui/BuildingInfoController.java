@@ -13,21 +13,36 @@ import pl.put.poznan.building.model.Construction;
 import pl.put.poznan.building.model.Location;
 import pl.put.poznan.building.model.Room;
 
-
+/**
+ * This is the main UI controller of application.
+ */
 @Controller
 public class BuildingInfoController {
 
     private final BuildingTransformer buildingTransformer;
 
+    /**
+     * In constructor must be injected an instance of BuildingTransformer
+     * 
+     * @param buildingTransformer instance of BuildingTransformer
+     */
     public BuildingInfoController(BuildingTransformer buildingTransformer) {
         this.buildingTransformer = buildingTransformer;
     }
 
+    /**
+     * This function returns webpage where user choose which activity want to perform
+     */
     @GetMapping("/")
     public String requestSizeForm() {
         return "request-size-form";
     }
 
+    /**
+     * This function returns webpage with detailed informations
+     * 
+     * @return webpage
+     */
     @PostMapping("/details")
     public String requestSizeSubmit(@ModelAttribute("locationType") LocationType locationType,
                                     @ModelAttribute("requestType") RequestType requestType,
@@ -65,6 +80,11 @@ public class BuildingInfoController {
         return "request-details-form";
     }
 
+    /**
+     * This function returns webpage with general result
+     * 
+     * @return webpage
+     */
     @PostMapping("/result")
     public String showInfo(@ModelAttribute("location") String locationString,
                          @ModelAttribute("requestType") RequestType requestType,
