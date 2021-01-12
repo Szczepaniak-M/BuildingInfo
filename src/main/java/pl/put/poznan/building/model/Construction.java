@@ -58,7 +58,7 @@ public class Construction extends Location {
     }
 
     /**
-     * This function returns total cube of sublocations
+     * This function returns total cubage of sublocations
      * 
      * @return cube - double
      */
@@ -72,7 +72,7 @@ public class Construction extends Location {
     }
 
     /**
-     * This function returns total cube of sublocations and puts it in map with id as key
+     * This function returns total cubage of sublocations and puts it in map with id as key
      * 
      * @param mao - Map<Intger, Double.
      * @return cube - double
@@ -102,14 +102,51 @@ public class Construction extends Location {
     }
 
     /**
-     * This function returns 0 as value of light
+     * This function returns value of light of Construction
      * 
-     * @return 0.0 - double
+     * @return light - double
      */
     @Override
     public double getLight() {
-        return 0;
+    	return 0.0;
     }
+    
+    /**
+     * This function returns value of light per square meter
+     * 
+     * @return light per square meter - double
+     */
+	@Override
+	public double getLightPerSquareMeter() {
+		double light = 0;
+        double area = 0;
+        for (Location location : getSublocation()) {
+            light += location.getLight();
+        }
+        for (Location location : getSublocation()) {
+            area += location.getArea();
+        }
+        return light / area;
+	}
+	
+	/**
+     * This function returns value of light per square meter and puts it in map with id as key
+     * 
+     * @param map - Map<Integer, Double>
+     * @return light per square meter - double
+     */
+	@Override
+	public double getLightPerSquareMeter(Map<Integer, Double> map) {
+		double light = 0;
+        double area = 0;
+        for (Location location : getSublocation()) {
+            light += location.getLight();
+            area += location.getArea();
+            location.getLightPerSquareMeter(map);
+        }
+        map.put(getId(), light / area);
+        return light / area;
+	}
 
     /**
      * This function checks if exceed doesn't exceed heat limit

@@ -76,6 +76,10 @@ public abstract class Location {
     public abstract double getHeating();
 
     public abstract double getLight();
+    
+    public abstract double getLightPerSquareMeter();
+    
+    public abstract double getLightPerSquareMeter(Map<Integer, Double> responseBody);
 
     public abstract boolean isOverHeatLimit(double limit);
 

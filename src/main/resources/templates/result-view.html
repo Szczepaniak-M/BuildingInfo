@@ -22,6 +22,8 @@
                   Powierzchnia: [[${location.getArea()}]]</span>
             <span th:case="${T(pl.put.poznan.building.gui.RequestType).CUBE}" th:inline="text">
                   Kubatura: [[${location.getCube()}]]</span>
+            <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIGHT}" th:inline="text">
+                  Moc oświetlenia na jednostkę powierzchni: [[${floor.getLightPerSquareMeter()}]]</span>      
             <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIMIT}" th:inline="text">
                   Czy przekracza limit: [[${location.isOverHeatLimit(limit) ? "Tak" : "Nie"}]]</span>
         </div>
@@ -35,6 +37,8 @@
                   Powierzchnia: [[${floor.getArea()}]]</span>
                 <span th:case="${T(pl.put.poznan.building.gui.RequestType).CUBE}" th:inline="text">
                   Kubatura: [[${floor.getCube()}]]</span>
+                <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIGHT}" th:inline="text">
+                  Moc oświetlenia na jednostkę powierzchni: [[${floor.getLightPerSquareMeter()}]]</span>
                 <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIMIT}" th:inline="text">
                   Czy przekracza limit: [[${floor.isOverHeatLimit(limit) ? "Tak" : "Nie"}]]</span>
             </div>
@@ -48,6 +52,8 @@
                         Powierzchnia: [[${room.getArea()}]]</span>
                     <span th:case="${T(pl.put.poznan.building.gui.RequestType).CUBE}" th:inline="text">
                         Kubatura: [[${room.getCube()}]]</span>
+                    <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIGHT}" th:inline="text">
+                  		Moc oświetlenia na jednostkę powierzchni: [[${floor.getLightPerSquareMeter()}]]</span>    
                     <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIMIT}" th:inline="text">
                         Czy przekracza limit: [[${room.isOverHeatLimit(limit) ? "Tak" : "Nie"}]]</span>
                 </div>

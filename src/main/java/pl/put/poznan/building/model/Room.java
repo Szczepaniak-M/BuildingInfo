@@ -58,7 +58,7 @@ public class Room extends Location {
     }
 
     /**
-     * This function returns cube of Room
+     * This function returns cubage of Room
      * 
      * @return cube - double
      */
@@ -68,7 +68,7 @@ public class Room extends Location {
     }
 
     /**
-     * This functions puts cube of Room in map with id as a key
+     * This functions puts cubage of Room in map with id as a key
      * 
      * @param map - Map<Integer, Double>
      * @return cube - double
@@ -98,6 +98,27 @@ public class Room extends Location {
     public double getLight() {
         return light;
     }
+    
+    /**
+     * This function returns value of light per square meter of Room
+     * 
+     * @return lightPerSquareMeter - double
+     */
+    @Override
+    public double getLightPerSquareMeter() {
+        return light / area;
+    }
+    
+    /**
+     * This function returns value of light per square meter of Room and puts it in map with id as key
+     * 
+     * @return lightPerSquareMeter - double
+     */
+	@Override
+	public double getLightPerSquareMeter(Map<Integer, Double> map) {
+		map.put(getId(), light / area);
+		return light / area;
+	}
 
     /**
      * This function checks if Room doesn't exceed heat limit
