@@ -122,6 +122,28 @@ public class Room extends Location {
     }
 
     /**
+     * This function returns value of energy usage per cubed meter of Room
+     *
+     * @return energy usage per cubed meter of Room
+     */
+    @Override
+    public double getEnergyUsagePerCubedMeter() {
+        return heating / cube;
+    }
+
+    /**
+     * This function returns value of energy usage per cubed meter of Room and puts it in map with id as key
+     *
+     * @param map visitor
+     * @return energy usage per cubed meter of Room
+     */
+    @Override
+    public double getEnergyUsagePerCubedMeter(Map<Integer, Double> map) {
+        map.put(getId(), heating / cube);
+        return heating / cube;
+    }
+
+    /**
      * This function checks if Room doesn't exceed heat limit
      *
      * @param limit value of limit

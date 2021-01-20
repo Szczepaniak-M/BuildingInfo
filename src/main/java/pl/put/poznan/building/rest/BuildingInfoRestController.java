@@ -145,4 +145,36 @@ public class BuildingInfoRestController {
         logger.info("<< calculateLocationsLightPerSquareMeter: {}", responseBody.toString());
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
+
+    /**
+     * This function returns value of energy usage per cubed meter of Location
+     *
+     * @param jsonObject json with input data
+     * @return JsonObject json with value of calculated energy usage per cubed meter for given Location
+     */
+    @PostMapping(value = "/energy/root", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Double>> calculateRootEnergyUsagePerCubedMeter(@RequestBody JsonObject jsonObject) {
+        logger.info(">> calculateRootEnergyUsagePerCubedMeter: {}", jsonObject.toString());
+        Map<String, Double> responseBody = new HashMap<>();
+        Location location = buildingTransformer.createLocation(jsonObject);
+        responseBody.put("sum", location.getEnergyUsagePerCubedMeter());
+        logger.info("<< calculateRootEnergyUsagePerCubedMeter: {}", responseBody.toString());
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
+    }
+
+    /**
+     * This function returns value of energy usage per cubed meter for every sublocation
+     *
+     * @param jsonObject json with input data
+     * @return JsonObject json with pairs: Location ID and Location cubage
+     */
+    @PostMapping(value = "/energy/all", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<Integer, Double>> calculateLocationsEnergyUsagePerCubedMeter(@RequestBody JsonObject jsonObject) {
+        logger.info(">> calculateLocationsEnergyUsagePerCubedMeter {}", jsonObject.toString());
+        Map<Integer, Double> responseBody = new HashMap<>();
+        Location location = buildingTransformer.createLocation(jsonObject);
+        location.getEnergyUsagePerCubedMeter(responseBody);
+        logger.info("<< calculateLocationsLightPerSquareMeter: {}", responseBody.toString());
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
+    }
 }

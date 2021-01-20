@@ -153,6 +153,44 @@ public class Construction extends Location {
     }
 
     /**
+     * This function returns value of energy usage per cubed meter
+     *
+     * @return energy usage per cubed meter of Construction
+     */
+    @Override
+    public double getEnergyUsagePerCubedMeter() {
+        double energyUsage = 0;
+        double cubage = 0;
+        for (Location location : getSublocation()) {
+            energyUsage += location.getHeating();
+        }
+        for (Location location : getSublocation()) {
+            cubage += location.getCube();
+        }
+        return energyUsage / cubage;
+    }
+
+    /**
+     * This function returns value of energy usage per cubed meter and puts it in map with id as key
+     *
+     * @param map visitor
+     * @return value of energy usage per cubed meter of Construction
+     */
+    @Override
+    public double getEnergyUsagePerCubedMeter(Map<Integer, Double> map) {
+        double energyUsage = 0;
+        double cubage = 0;
+        for (Location location : getSublocation()) {
+            energyUsage += location.getHeating();
+            cubage += location.getCube();
+            location.getEnergyUsagePerCubedMeter(map);
+        }
+        map.put(getId(), energyUsage / cubage);
+        return energyUsage / cubage;
+    }
+
+
+    /**
      * This function checks if exceed doesn't exceed heat limit
      *
      * @param limit value of limit

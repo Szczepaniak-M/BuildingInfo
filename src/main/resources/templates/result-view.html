@@ -24,6 +24,8 @@
                   Kubatura: [[${location.getCube()}]]</span>
             <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIGHT}" th:inline="text">
                   Moc oświetlenia na jednostkę powierzchni: [[${location.getLightPerSquareMeter()}]]</span>
+            <span th:case="${T(pl.put.poznan.building.gui.RequestType).HEAT}" th:inline="text">
+                 Zużycie energii cieplnej na jednostkę objętości: [[${location.getEnergyUsagePerCubedMeter()}]]</span>
             <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIMIT}" th:inline="text">
                   Czy przekracza limit: [[${location.isOverHeatLimit(limit) ? "Tak" : "Nie"}]]</span>
         </div>
@@ -39,6 +41,8 @@
                   Kubatura: [[${floor.getCube()}]]</span>
                 <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIGHT}" th:inline="text">
                   Moc oświetlenia na jednostkę powierzchni: [[${floor.getLightPerSquareMeter()}]]</span>
+                <span th:case="${T(pl.put.poznan.building.gui.RequestType).HEAT}" th:inline="text">
+                 Zużycie energii cieplnej na jednostkę objętości: [[${floor.getEnergyUsagePerCubedMeter()}]]</span>
                 <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIMIT}" th:inline="text">
                   Czy przekracza limit: [[${floor.isOverHeatLimit(limit) ? "Tak" : "Nie"}]]</span>
             </div>
@@ -54,6 +58,8 @@
                         Kubatura: [[${room.getCube()}]]</span>
                     <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIGHT}" th:inline="text">
                   		Moc oświetlenia na jednostkę powierzchni: [[${room.getLightPerSquareMeter()}]]</span>
+                    <span th:case="${T(pl.put.poznan.building.gui.RequestType).HEAT}" th:inline="text">
+                 Zużycie energii cieplnej na jednostkę objętości: [[${room.getEnergyUsagePerCubedMeter()}]]</span>
                     <span th:case="${T(pl.put.poznan.building.gui.RequestType).LIMIT}" th:inline="text">
                         Czy przekracza limit: [[${room.isOverHeatLimit(limit) ? "Tak" : "Nie"}]]</span>
                 </div>

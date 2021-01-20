@@ -4,7 +4,8 @@ enum RequestType {
     AREA("Powierzchnię"),
     CUBE("Kubaturę"),
     LIMIT("Przekroczenie limitu zużycia energii cieplnej"),
-	LIGHT("Oświetlenie");
+	LIGHT("Oświetlenie"),
+    HEAT("Zużycie energii cieplnej na jednostkę sześcienną");
 
     private final String text;
 
