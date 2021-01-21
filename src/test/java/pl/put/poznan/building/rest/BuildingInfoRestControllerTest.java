@@ -98,4 +98,61 @@ class BuildingInfoRestControllerTest {
         map.put(4, 190.0);
         assertEquals(responseEntity.getBody(), map);
     }
+
+    @Test
+    public void testCalculateRootLightPerSquareMeter() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        ResponseEntity<Map<String, Double>> responseEntity = buildingInfoRestController.calculateRootLightPerSquareMeter(new JsonObject());
+        Map<String, Double> map = Map.of("sum", (210.0 + 100.0)/(123 + 65));
+        assertEquals(responseEntity.getBody(), map);
+    }
+
+    @Test
+    public void testCalculateLocationsLightPerSquareMeter() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        ResponseEntity<Map<Integer, Double>> responseEntity = buildingInfoRestController.calculateLocationsLightPerSquareMeter(new JsonObject());
+        Map<Integer, Double> map = new HashMap<>();
+        map.put(1, (210.0 + 100.0)/(123 + 65));
+        map.put(2, (210.0 + 100.0)/(123 + 65));
+        map.put(3, 210.0/123);
+        map.put(4, 100.0/65);
+        assertEquals(responseEntity.getBody(), map);
+    }
+
+    @Test
+    public void testCalculateRootEnergyUsagePerCubedMeter() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        ResponseEntity<Map<String, Double>> responseEntity = buildingInfoRestController.calculateRootEnergyUsagePerCubedMeter(new JsonObject());
+        Map<String, Double> map = Map.of("sum", (156.0 + 90.0)/(400 + 190));
+        assertEquals(responseEntity.getBody(), map);
+    }
+
+    @Test
+    public void testCalculateLocationsEnergyUsagePerCubedMeter() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        ResponseEntity<Map<Integer, Double>> responseEntity = buildingInfoRestController.calculateLocationsEnergyUsagePerCubedMeter(new JsonObject());
+        Map<Integer, Double> map = new HashMap<>();
+        map.put(1, (156.0 + 90.0)/(400 + 190));
+        map.put(2, (156.0 + 90.0)/(400 + 190));
+        map.put(3, 156.0/400);
+        map.put(4, 90.0/190);
+        assertEquals(responseEntity.getBody(), map);
+    }
+
+    @Test
+    public void testCalculateLocationsEnergyUsagePerCubedMeterForSingleRoom() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        Location testRoom = new Room(1, "testRoom", 81, 729, 300, 215);
+        when(buildingTransformerMock.createLocation(any(JsonObject.class))).thenReturn(testRoom);
+        buildingInfoRestController = new BuildingInfoRestController(buildingTransformerMock);
+        ResponseEntity<Map<Integer, Double>> responseEntity = buildingInfoRestController.calculateLocationsEnergyUsagePerCubedMeter(new JsonObject());
+        Map<Integer, Double> map = new HashMap<>();
+        map.put(1, 300.0/729);
+        assertEquals(responseEntity.getBody(), map);
+    }
 }
